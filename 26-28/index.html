@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>VueJS</title>
+  <link rel="stylesheet" href="#">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button v-on:click="counter++">Increase</button>
+    <button v-on:click="counter--">Decrease</button>
+    <button v-on:click="secondCounter++">Increase second</button>
+    <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+    <p>Result: {{ result() }} | {{ output }}</p>
+  </div>
+  <script>
+    // You may of course also outsource this script code into a separate file (e.g. app.js) and simply import this file here
+    new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+        secondCounter: 0,
+      },
+      computed: {
+        // es5 syntax
+        output: function() {
+          console.log('computed');
+          return this.counter > 5 ? 'Greater 5' : 'Smaller 5'
+        }
+      },
+      watch: {
+        counter: function(value) {
+          var vm = this;
+          setTimeout(function(){
+            vm.counter = 0;
+          }, 2000)
+        }
+      },
+      methods: {
+        // es6 syntax
+        result() {
+          console.log('method');
+          return this.counter > 5 ? 'Greater 5' : 'Smaller 5'
+        }
+      }
+      // methods: {
+      //   increase: function() {
+      //     this.counter ++;
+      //     this.result = this.counter > 5 ? 'Greater 5' : 'Smaller 5'
+      //   },
+      //   decrease: function() {
+      //     this.counter --;
+      //     this.result = this.counter > 5 ? 'Greater 5' : 'Smaller 5'
+      //   }
+      // }
+    })
+  </script>
+</body>
+
+</html>
